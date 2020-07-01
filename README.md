@@ -1,1 +1,1 @@
-#Conociendo componentes de Vue JS
+##Conociendo componentes de Vue JS
