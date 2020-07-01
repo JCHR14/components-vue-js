@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS</title>
+</head>
+<body>
+    <div id="app">
+        <plan-picker></plan-picker>
+    </div>
+
+    <!-- Componente plan picker>> componente padre -->
+    <script type="text/x-template" id="plan-picker-template">
+        <div>
+            <h1>Basic compoment using VueJS</h1>
+            <plan v-for="x in plans" :name="x.title" @select="selectPlan" :selected-plan="selectedPlan"></plan>
+        </div>
+    </script>
+
+    <!-- Componente plan>> componente hijo -->
+    <script type="text/x-template" id="plan-template">
+        <div @click="select" class="plan" :class="{'active-plan': isSelected}">
+            <h4>{{name}}</h4>
+        </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/02-plan.js"></script>
+    <link rel="stylesheet" href="css/02-style.css">
+</body>
+</html>

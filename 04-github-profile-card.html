@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Profile Github</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+        #app {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="ui container ">
+        <github-user-card username="jchr14"></github-user-card >
+        <github-user-card username="harveydf"></github-user-card >
+        <github-user-card username="obetancourthunicah"></github-user-card >
+        
+            
+    </div>
+    
+    <script type="text/x-template" id="github-user-card-template" >
+        <div class="ui card">
+            <div class="image">
+                <img :src="user.avatar_url">
+            </div>
+            <div class="content">
+                <a class="header">{{user.login}}</a>
+                <div class="meta">
+                    <span class="date">Joined in {{user.created_at}}</span>
+                </div>
+                <div class="description">
+                    {{user.location}}
+                </div>
+            </div>
+            <div class="extra content">
+                <a>
+                    <i class="user icon"></i>
+                    {{user.followers}} followers
+                </a>
+            </div>
+        </div>
+    </script>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <!--  VUE Scripts -->
+    <script>
+        Vue.component('github-user-card', {
+            template: '#github-user-card-template',
+            props : {
+                username : {
+                    type: String,
+                    required: true
+                }
+            },
+            data() {
+                return {
+                    user:{}
+                }
+            },
+            created() {
+                axios.get(`https://api.github.com/users/${this.username}`)
+                .then(response => {
+                    this.user = response.data
+                })
+            },
+        })
+
+
+        new Vue({
+            el : '#app'
+        })
+    </script>
+</body>
+</html>

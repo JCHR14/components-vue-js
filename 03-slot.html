@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <h1>Vue Slots Fundamentals</h1>
+        <todo-item>
+            Mangos
+            <template #description>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br> 
+                    Non optio a quis magnam blanditiis odio nemo alias quae expedita, <br>
+                    architecto voluptate quam veniam dignissimos, quos dolorem  <br>
+                    voluptatem suscipit tenetur nulla?
+                </p>
+            </template>
+            <template #button-text >
+                Terminarlo
+            </template >
+        </todo-item>
+        <hr>
+        <todo-item>
+            Mangos
+            <template #description>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br> 
+                    Non optio a quis magnam blanditiis odio nemo alias quae expedita, <br>
+                    architecto voluptate quam veniam dignissimos, quos dolorem  <br>
+                    voluptatem suscipit tenetur nulla?
+                </p>
+            </template>
+        </todo-item>
+
+
+    </div>
+    <script type="text/x-template" id="todo-item-template">
+        <div>
+            <input type="checkbox" v-model="completed">
+            <span :class="{done: completed }">
+                <slot></slot>
+            </span>
+            <slot name="description"></slot>
+            <button>
+                <slot name="button-text"> Default</slot>
+            </button>
+        </div>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/03-slot.js"></script>
+    <style>
+        .done{
+            color: green;
+            text-decoration: line-through;
+        }
+    </style>
+</body>
+</html>

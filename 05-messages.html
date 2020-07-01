@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages Alert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+<body>
+
+    <div class="ui container" id="app">
+        <h1>Messages Alert</h1>
+        <notification-message type="error" header="Oh no!" >
+            <p>Esto es un mensaje de error!</p>
+        </notification-message>
+
+        <notification-message type="success" header="Excelent!" >
+            <p>Todo salio pijudo perrir!</p>
+        </notification-message>
+
+        <notification-message type="warning" header="Upaa!" >
+            <p>Tenga cuidado mi perro!</p>
+        </notification-message>
+        <notification-message>
+            <p>Tenga cuidado mi perro!</p>
+        </notification-message>
+
+    </div>
+
+    <script type="text/x-template" id="notification-message-template" >
+        <div class="ui message" :class="type" v-if="!hidden"  >
+            <i class="close icon" @click="hide"></i>
+            <div class="header">
+                {{header}}
+            </div>
+            <slot></slot>
+        </div>
+
+    </script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        Vue.component('notification-message',{
+            template: '#notification-message-template',
+            props : {
+                type : {
+                    type: String,
+                    default: 'info',
+                },
+                header : {
+                    type: String,
+                    default : 'Information'
+                }
+            },
+            data() {
+                return {
+                    hidden: false
+                }
+            },
+            methods: {
+                hide(){
+                    this.hidden = true
+                }
+            },
+        })
+
+        new Vue({
+            el:'#app', 
+        })
+    </script>
+    
+</body>
+</html>
